@@ -2,65 +2,35 @@
 #include <string>
 using namespace std;
 
-string word;
+string a;
 string list[5];
 
 void ordering()
 {
-    if (word[0] == 'a')
-        list[0] = word;
-    else if (word[0] == 'b')
-        list[1] = word;
-    else if (word[0] == 'c')
-        list[2] = word;
+    for(int i=0; i<5; i++){
+    cin>>list[i];
+    for(int m=0; m<5; m++){
+        for(int j=m+1; j<5; j++){
+            if(list[m]>list[j]){
+                a=list[m];
+                list[m]=list[j];
+                list[j]=a;
+            }
+        }
+    }
+    }
 }
 
 int main()
 {
-    int a = 0;
-    while (a < 3)
-    {
-        cout << "Enter a word: ";
-        cin >> word;
-        ordering();
-        a++;
+    cout<<"Enter 5 words: ";
+    ordering();
+    cout << "Alphebetical order: " << endl;
+    for (int k = 0; k < 5; k++){
+        cout << list[k] << " ";
     }
-
-    for (int i = 0; i < 3; i++)
-        cout << list[i] << endl;
+    cout << endl;
 
     return 0;
 }
-#include <iostream>
-#include <string>
-using namespace std;
 
-string word;
-string list[5];
-
-void ordering()
-{
-    if (word[0] == 'a')
-        list[0] = word;
-    else if (word[0] == 'b')
-        list[1] = word;
-    else if (word[0] == 'c')
-        list[2] = word;
-}
-
-int main()
-{
-    int a = 0;
-    while (a < 3)
-    {
-        cout << "Enter a word: ";
-        cin >> word;
-        ordering();
-        a++;
-    }
-
-    for (int i = 0; i < 3; i++)
-        cout << list[i] << endl;
-
-    return 0;
-}
