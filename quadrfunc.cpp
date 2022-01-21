@@ -74,9 +74,9 @@ int main()
              << "(" << xv << "," << yv << ")" << endl;
         m = x1 < x2 ? x1 : x2;
         n = x2 > x1 ? x2 : x1;
-        cout << "It is positive from " << m << " to " << n << endl;
-        cout << "It is negative from -inf to " << m << " and from " << n
-             << " to +inf." << endl;
+        cout << "It is positive in the interval ]" << m << ", " << n <<"["<< endl;
+        cout << "It is negative in the interval ]-inf, " << m << "[ U "<<"]"<< n
+             << ", +inf[" << endl;
     }
     else if (delta > 0 && a > 0)
     {
@@ -89,9 +89,9 @@ int main()
              << "(" << xv << "," << yv << ")" << endl;
         p = x1 < x2 ? x1 : x2;
         q = x2 > x1 ? x2 : x1;
-        cout << "It is negative from " << p << " to " << q << endl;
-        cout << "It is positive from -inf to " << p << " and from " << q
-             << " to +inf." << endl;
+        cout << "It is negative in the interval ]" << p << ", " << q <<"["<< endl;
+        cout << "It is positive in the interval ]-inf, " << p << "[ U "<<"]"<< q
+             << ", +inf[" << endl;
     }
     return 0;
 }
