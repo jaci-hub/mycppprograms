@@ -1,2 +1,2 @@
 # mycppprograms
-Competitive Programming Problem Solutions and more!!!
+Just some random cpp programs:)
