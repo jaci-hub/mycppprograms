@@ -64,9 +64,9 @@ tuple<int, int, int> pqm(int n){
 }
 
 /*Sorting with the sequences*/
-vector<int> mysort(vector<int>& A){
+vector<int> mysort(vector<int> A){
   int p, q, m;
-  vector<int> B(A.size());
+  vector<int> B(A.size(),-1);
   for(int i=0; i<A.size(); i++){
     tie(p,q,m)=pqm(A[i]);
     //como preencher B??
@@ -75,7 +75,11 @@ vector<int> mysort(vector<int>& A){
 }
 
 int main(){
-  
-
+  vector<int> A ={2,3,1,0};
+  int p, q, m;
+  for(int i=0; i<A.size(); i++){
+    tie(p,q,m)=pqm(A[i]);
+    cout<<A[i]<<": "<<p<<", "<<q<<", "<<m<<"\n";
+  }
   return 0;
 }
