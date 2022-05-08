@@ -2,8 +2,6 @@
 
 using namespace std;
 
-
-
 int main(){
     ifstream fin;
     fin.open("hughesinterviewdata.txt");
