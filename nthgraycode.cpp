@@ -71,15 +71,13 @@ vector<int> vistos; //collector
 /*int*/void Cycle(int n){ //Gives the cycle of n, which is defined as applying g(n) repeatedly till the result is n again.
 int res=n, counter=1;
   cout<<res<<" -> ";
-  //vistos.push_back(res);
+  vistos.push_back(res);
   while(g(res)!=n){
     res=g(res);
     counter++;
       cout<<res<<" -> ";
       vistos.push_back(res);
   }
-  cout<<"\n";
-  cout<<"C("<<n<<") = "<<counter;
   cout<<"\n";
   //return counter;
 }
@@ -96,12 +94,11 @@ int main(){
 //   cout<<a<<"\n";
 
 for(double i=0; i<=15; i++){
-  // sort(vistos.begin(), vistos.end());
-  // for(int j=0; j<vistos.size(); j++){
-  //   while(i == vistos[j])
-  //     i++;
-  // }
-  //Cycle(pow(2,pow(2,i))); 
+  sort(vistos.begin(), vistos.end());
+  for(int j=0; j<vistos.size(); j++){
+    while(i == vistos[j])
+      i++;
+  }
   Cycle(i);
 }
 
