@@ -72,10 +72,42 @@ int G(int n){
 }
 
 /*
+  This function returns the sequence that n+G(n) belongs to. 
+  For example, n=13 implies c-sequence, because n+G(n) = 13+11 = 24, and 24 is part of the c-sequence
+*/
+string get_sequence(int n){
+  //checking a-sequence
+  if((n-2)%4==0)
+    return "a";
+  else if((n-3)%4==0)
+    return "a";
+  //checking b-sequence
+  else if((n-9)%16==0)
+    return "b";
+  else if((n-12)%16==0)
+    return "b";
+  //checking c-sequence
+  else if((n-8)%16==0)
+    return "c";
+  else if((n-13)%16==0)
+    return "c";
+  //checking d-sequence
+  else if(n%8==0 && (n/8)%2==0)
+    return "d";
+  else if((n+4)%8==0 && ((n+4)/8)%2!=0)
+    return "d";
+  else if((n-1)%8==0 && ((n-1)/8)%2==0)
+    return "d";
+  else if((n+3)%8==0 && ((n+3)/8)%2!=0)
+    return "d";
+  return "N/A";
+}
+
+/*
   This function returns the subscript of the sequence term. 
   For example, the general term of the a-sequence is a(k), so the function returns k
 */
-int sequence_term_number(int n){
+int get_sequence_term_number(int n){
   //checking a-sequence
   if((n-2)%4==0)
     return (n-2)/4;
@@ -109,7 +141,7 @@ int sequence_term_number(int n){
   The point is that it allows us to know if when n=2, for example, which has G(n)=3, which 5 in the a-sequence
   their sum (n+G(n)) refers to. In this case it refers to the first 5, and the second is for when n=3.
 */
-int sequence_term_number_0th_or_1st(int n){
+int get_sequence_term_number_0th_or_1st(int n){
   //checking a-sequence
   if((n-2)%4==0)
     return 0;
@@ -166,6 +198,13 @@ int main(){
   //   }
   // }
   // cout<<a<<"\n";
+
+  /*
+    SEQUENCE THAT N BELONGS TO
+  */
+  // for(int i=0; i<=31; i++){
+  //   cout<<i<<": "<<get_sequence(i)<<"\n";
+  // }
 
   /*
     SEQUENCE TERM AND 0th OR 1st
