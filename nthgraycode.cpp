@@ -3,6 +3,7 @@
 #include<vector>
 #include<algorithm> //for sort
 #include<cmath>
+#include<fstream>
 using namespace std;
 
 //NAME: JACINTO QUIMUA
@@ -210,7 +211,7 @@ int main(){
     SEQUENCE TERM AND 0th OR 1st
   */
   // for(int n=0; n<=31; n++){
-  //   cout<<n<<": "<<sequence_term_number(n)<<" - "<<sequence_term_number_0th_or_1st(n)<<"\n";
+  //   cout<<n<<": "<<get_sequence_term_number(n)<<" - "<<get_sequence_term_number_0th_or_1st(n)<<"\n";
   // }
 
   /*
@@ -225,6 +226,18 @@ int main(){
     }
   }
   cout<<a<<"\n";
+
+  /*
+    PRINT NUMBERS WITH ALL THEIR INFO
+  */
+  // ofstream fout;
+  // fout.open("sequences.csv");
+  // fout<<"n\tsequence\tkth term\t0th or 1st\tlog2 Cn\n";
+  // for(int i=0; i<=pow(10,9); i++){
+  //   fout<<to_string(i)+"\t"+get_sequence(i)+"\t"+to_string(get_sequence_term_number(i))+"\t"+to_string(get_sequence_term_number_0th_or_1st(i))+"\t"+to_string(int(log2(C(i))))+"\n";
+  // }
+  // fout.close();
+  // cout<<"* Done *\n";
 
   return 0;
 }
