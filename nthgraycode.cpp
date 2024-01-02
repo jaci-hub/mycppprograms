@@ -13,12 +13,12 @@ My goal is to find the nth gray code number using sequences!
 */
 
 //g(n) gives the nth gray code
-int g (int n) {
+unsigned long long int g (unsigned long long int n) {
   return n ^ (n >> 1);
 }
 
 //a-sequence
-int a(int k){
+unsigned long long int a(unsigned long long int k){
 if(k==0)
   return 5;
 else if(k%2!=0)
@@ -27,15 +27,15 @@ else
   return 2*a(k/2)+4*(pow(-1,(k/2)+1))-1;
 }
 //b-sequence
-int b(int k){
+unsigned long long int b(unsigned long long int k){
   return a(4*k+2)-3;
 }
 //c-sequence
-int c(int k){
+unsigned long long int c(unsigned long long int k){
   return a(4*k+2)-5;
 }
 //d-sequence
-int d(int k){
+unsigned long long int d(unsigned long long int k){
   if(k%2 != 0)
     return a(2*k-1)-1;
   else return a(2*k)-5;
@@ -44,7 +44,7 @@ int d(int k){
 /*
   This function returns the nth gray code, using a,b,c and d sequences
 */
-int G(int n){
+unsigned long long int G(unsigned long long int n){
   //checking a-sequence
   if((n-2)%4==0)
     return a((n-2)/4)-n;
@@ -76,7 +76,7 @@ int G(int n){
   This function returns the sequence that n+G(n) belongs to. 
   For example, n=13 implies c-sequence, because n+G(n) = 13+11 = 24, and 24 is part of the c-sequence
 */
-string get_sequence(int n){
+string get_sequence(unsigned long long int n){
   //checking a-sequence
   if((n-2)%4==0)
     return "a";
@@ -108,7 +108,7 @@ string get_sequence(int n){
   This function returns the subscript of the sequence term. 
   For example, the general term of the a-sequence is a(k), so the function returns k
 */
-int get_sequence_term_number(int n){
+unsigned long long int get_sequence_term_number(unsigned long long int n){
   //checking a-sequence
   if((n-2)%4==0)
     return (n-2)/4;
@@ -142,7 +142,7 @@ int get_sequence_term_number(int n){
   The point is that it allows us to know if when n=2, for example, which has G(n)=3, which 5 in the a-sequence
   their sum (n+G(n)) refers to. In this case it refers to the first 5, and the second is for when n=3.
 */
-int get_sequence_term_number_0th_or_1st(int n){
+unsigned long long int get_sequence_term_number_0th_or_1st(unsigned long long int n){
   //checking a-sequence
   if((n-2)%4==0)
     return 0;
@@ -173,7 +173,7 @@ int get_sequence_term_number_0th_or_1st(int n){
 /*
   Gives the cycle of n, which is defined as applying g(n) repeatedly till the result is n again.
 */
-int recursion_C(int n){
+unsigned long long int recursion_C(unsigned long long int n){
   int res=n, counter=1;
   while(g(res)!=n){
     res=g(res);
@@ -182,7 +182,7 @@ int recursion_C(int n){
   return counter;
 }
 
-int C(int n){
+unsigned long long int C(unsigned long long int n){
   return n <= 1 ? 1 : pow(2, floor(log2(log2(n)))+1);
 }
 
@@ -191,7 +191,7 @@ int main(){
     NTH GRAY CODE NUMBER
   */
   // string a="Your nth gray code algorithm works!!!";
-  // for(int i=0; i<=pow(10,5); i++){ 
+  // for(unsigned long long int i=0; i<=pow(10,5); i++){ 
   //   if(G(i)!= g(i)){
   //     a="";
   //     cout<<"Wrong for i = "<< i;
@@ -203,41 +203,53 @@ int main(){
   /*
     SEQUENCE THAT N BELONGS TO
   */
-  // for(int i=0; i<=31; i++){
+  // for(unsigned long long int i=0; i<=31; i++){
   //   cout<<i<<": "<<get_sequence(i)<<"\n";
   // }
 
   /*
     SEQUENCE TERM AND 0th OR 1st
   */
-  // for(int n=0; n<=31; n++){
+  // for(unsigned long long int n=0; n<=31; n++){
   //   cout<<n<<": "<<get_sequence_term_number(n)<<" - "<<get_sequence_term_number_0th_or_1st(n)<<"\n";
   // }
 
   /*
     CYCLE OF N
   */
-  string a="Your cycle algorithm works!!!";
-  for(int i=0; i<=pow(10,5); i++){
-    if(recursion_C(i)!=C(i)){
-      a="";
-      cout<<"Failed for i = "<<i<<"\n";
-      break;
-    }
-  }
-  cout<<a<<"\n";
+  // string a="Your cycle algorithm works!!!";
+  // for(unsigned long long int i=0; i<=pow(10,5); i++){
+  //   if(recursion_C(i)!=C(i)){
+  //     a="";
+  //     cout<<"Failed for i = "<<i<<"\n";
+  //     break;
+  //   }
+  // }
+  // cout<<a<<"\n";
 
   /*
     PRINT NUMBERS WITH ALL THEIR INFO
   */
-  // ofstream fout;
-  // fout.open("sequences.csv");
-  // fout<<"n\tsequence\tkth term\t0th or 1st\tlog2 Cn\n";
-  // for(int i=0; i<=pow(10,9); i++){
-  //   fout<<to_string(i)+"\t"+get_sequence(i)+"\t"+to_string(get_sequence_term_number(i))+"\t"+to_string(get_sequence_term_number_0th_or_1st(i))+"\t"+to_string(int(log2(C(i))))+"\n";
-  // }
-  // fout.close();
-  // cout<<"* Done *\n";
+  ofstream fout;
+  //print n<=1
+  fout.open("sequences_log2cycle_0.csv");
+  fout<<"n\tsequence\tkth term\t0th or 1st\tlog2 Cn\n";
+  for(unsigned long long int i=0; i<=1; i++){
+    unsigned long long int log2cycle = log2(C(i));
+    fout<<to_string(i)+"\t"+get_sequence(i)+"\t"+to_string(get_sequence_term_number(i))+"\t"+to_string(get_sequence_term_number_0th_or_1st(i))+"\t"+to_string(log2cycle)+"\n";
+  }
+  fout.close();
+  //print n>1
+  for(int j=0; j<=5; j++){
+    fout.open("sequences_log2cycle_"+to_string(j+1)+".csv");
+    fout<<"n\tsequence\tkth term\t0th or 1st\tlog2 Cn\n";
+    for(unsigned long long int i=pow(2, pow(2, j)); i<=pow(2, pow(2, j+1))-1; i++){
+      unsigned long long int log2cycle = log2(C(i));
+      fout<<to_string(i)+"\t"+get_sequence(i)+"\t"+to_string(get_sequence_term_number(i))+"\t"+to_string(get_sequence_term_number_0th_or_1st(i))+"\t"+to_string(log2cycle)+"\n";
+    }
+    fout.close();
+    cout<<"* Finished j = "<<j<< " *\n";
+  }
 
   return 0;
 }
