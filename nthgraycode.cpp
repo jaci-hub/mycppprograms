@@ -186,19 +186,43 @@ unsigned long long int C(unsigned long long int n){
   return n <= 1 ? 1 : pow(2, floor(log2(log2(n)))+1);
 }
 
+unsigned long long int substring_occurrences_in_a_string(string pattern, string some_string){
+  unsigned long long int occurrence=0, left_bound=0, right_bound=pattern.size()-1;
+  if(pattern.size() > some_string.size()){
+    return 0;
+  }
+  else if(pattern == some_string){
+    return 1;
+  }
+  else{
+    while(right_bound<some_string.size()){
+      string substring = "";
+      for(int i=left_bound; i<=right_bound; i++){
+        substring+=some_string[i];
+      }
+      if(substring==pattern){
+        occurrence++;
+      }
+      left_bound++;
+      right_bound++;
+    }
+  }
+  return occurrence;
+}
+
 int main(){
   /*
     NTH GRAY CODE NUMBER
   */
-  // string a="Your nth gray code algorithm works!!!";
-  // for(unsigned long long int i=0; i<=pow(10,5); i++){ 
-  //   if(G(i)!= g(i)){
-  //     a="";
-  //     cout<<"Wrong for i = "<< i;
-  //     break;
-  //   }
-  // }
-  // cout<<a<<"\n";
+  string a="Your nth gray code algorithm works!!!";
+  for(unsigned long long int i=0; i<=pow(10,5); i++){ 
+    if(G(i)!= g(i)){
+      a="";
+      cout<<"Wrong for i = "<< i;
+      break;
+    }
+  }
+  cout<<a<<"\n";
 
   /*
     SEQUENCE THAT N BELONGS TO
@@ -230,26 +254,57 @@ int main(){
   /*
     PRINT NUMBERS WITH ALL THEIR INFO
   */
-  ofstream fout;
-  //print n<=1
-  fout.open("sequences_log2cycle_0.csv");
-  fout<<"n\tsequence\tkth term\t0th or 1st\tlog2 Cn\n";
-  for(unsigned long long int i=0; i<=1; i++){
-    unsigned long long int log2cycle = log2(C(i));
-    fout<<to_string(i)+"\t"+get_sequence(i)+"\t"+to_string(get_sequence_term_number(i))+"\t"+to_string(get_sequence_term_number_0th_or_1st(i))+"\t"+to_string(log2cycle)+"\n";
-  }
-  fout.close();
-  //print n>1
-  for(int j=0; j<=5; j++){
-    fout.open("sequences_log2cycle_"+to_string(j+1)+".csv");
-    fout<<"n\tsequence\tkth term\t0th or 1st\tlog2 Cn\n";
-    for(unsigned long long int i=pow(2, pow(2, j)); i<=pow(2, pow(2, j+1))-1; i++){
-      unsigned long long int log2cycle = log2(C(i));
-      fout<<to_string(i)+"\t"+get_sequence(i)+"\t"+to_string(get_sequence_term_number(i))+"\t"+to_string(get_sequence_term_number_0th_or_1st(i))+"\t"+to_string(log2cycle)+"\n";
-    }
-    fout.close();
-    cout<<"* Finished j = "<<j<< " *\n";
-  }
+  //ofstream fout;
+  //** print n<=1
+  // fout.open("sequences_log2cycle_0.csv");
+  // fout<<"n\tsequence\tkth term\t0th or 1st\tlog2 Cn\n";
+  // for(unsigned long long int i=0; i<=1; i++){
+  //   unsigned long long int log2cycle = log2(C(i));
+  //   fout<<to_string(i)+"\t"+get_sequence(i)+"\t"+to_string(get_sequence_term_number(i))+"\t"+to_string(get_sequence_term_number_0th_or_1st(i))+"\t"+to_string(log2cycle)+"\n";
+  // }
+  // fout.close();
+  //** print n>1
+  // for(int j=0; j<=3; j++){
+  //   fout.open("sequences_log2cycle_"+to_string(j+1)+".csv");
+  //   fout<<"n\tsequence\tkth term\t0th or 1st\tlog2 Cn\n";
+  //   for(unsigned long long int i=pow(2, pow(2, j)); i<=pow(2, pow(2, j+1))-1; i++){
+  //     unsigned long long int log2cycle = log2(C(i));
+  //     fout<<to_string(i)+"\t"+get_sequence(i)+"\t"+to_string(get_sequence_term_number(i))+"\t"+to_string(get_sequence_term_number_0th_or_1st(i))+"\t"+to_string(log2cycle)+"\n";
+  //   }
+  //   fout.close();
+  //   cout<<"* Finished j = "<<j<< " *\n";
+  // }
+
+  /*
+    OCCURRENCES OF THE "dadacbabca" PATTERN per log2 Cn interval
+  */
+  // fout.open("pattern_occurrence_per_log2cycle.csv");
+  // string pattern, log2cycle_sequences="";
+  // unsigned long long int i, occurrence=0;
+  // fout<<"log2 Cn\tpattern\toccurrence\n";
+  // /*
+  //   IMPORTANT: Note that there is not need to analyze log2cycle=0 and log2cycle=1, 
+  //   because those ALWAYS have only one sequence, d0 and a0, respectively.
+  // */
+  // for(int j=1; j<=3; j++){
+  //   for(i=pow(2, pow(2, j)); i<=pow(2, pow(2, j+1))-1; i++){
+  //     log2cycle_sequences+=get_sequence(i);
+  //   }
+  //   i-=1;
+  //   unsigned long long int log2cycle = log2(C(i));
+  //   if(j==1){
+  //     pattern = "ddaacbaabcaa";
+  //   }
+  //   else{
+  //     pattern = "ddaaddaacbaabcaa";
+  //   }
+  //   occurrence = substring_occurrences_in_a_string(pattern, log2cycle_sequences);
+  //   fout<<to_string(log2cycle)+"\t"+pattern+"\t"+to_string(occurrence)+"\n";
+  //   log2cycle_sequences.clear();
+
+  //   cout<<"* Finished j = "<<j<< " *\n";
+  // }
+  // fout.close();
 
   return 0;
 }
