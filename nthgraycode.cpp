@@ -105,10 +105,10 @@ string get_sequence(unsigned long long int n){
 }
 
 /*
-  This function returns the subscript of the sequence term. 
+  This function returns the index of the sequence term. 
   For example, the general term of the a-sequence is a(k), so the function returns k
 */
-unsigned long long int get_sequence_term_number(unsigned long long int n){
+unsigned long long int get_sequence_index(unsigned long long int n){
   //checking a-sequence
   if((n-2)%4==0)
     return (n-2)/4;
@@ -137,12 +137,12 @@ unsigned long long int get_sequence_term_number(unsigned long long int n){
 }
 
 /*
-  This function returns the 0 if the kth term of a sequence is the first one, and 1 otherwise.
+  This function returns 0 if the kth term of a sequence is the first one, and 1 otherwise.
   For example the a-sequence has 5 and 5 as its first term, a(0), k=0.
   The point is that it allows us to know if when n=2, for example, which has G(n)=3, which 5 in the a-sequence
   their sum (n+G(n)) refers to. In this case it refers to the first 5, and the second is for when n=3.
 */
-unsigned long long int get_sequence_term_number_0th_or_1st(unsigned long long int n){
+unsigned long long int get_sequence_0th_or_1st(unsigned long long int n){
   //checking a-sequence
   if((n-2)%4==0)
     return 0;
@@ -235,7 +235,7 @@ int main(){
     SEQUENCE TERM AND 0th OR 1st
   */
   // for(unsigned long long int n=0; n<=31; n++){
-  //   cout<<n<<": "<<get_sequence_term_number(n)<<" - "<<get_sequence_term_number_0th_or_1st(n)<<"\n";
+  //   cout<<n<<": "<<get_sequence_index(n)<<" - "<<get_sequence_0th_or_1st(n)<<"\n";
   // }
 
   /*
@@ -260,7 +260,7 @@ int main(){
   // fout<<"n\tsequence\tkth term\t0th or 1st\tlog2 Cn\n";
   // for(unsigned long long int i=0; i<=1; i++){
   //   unsigned long long int log2cycle = log2(C(i));
-  //   fout<<to_string(i)+"\t"+get_sequence(i)+"\t"+to_string(get_sequence_term_number(i))+"\t"+to_string(get_sequence_term_number_0th_or_1st(i))+"\t"+to_string(log2cycle)+"\n";
+  //   fout<<to_string(i)+"\t"+get_sequence(i)+"\t"+to_string(get_sequence_index(i))+"\t"+to_string(get_sequence_0th_or_1st(i))+"\t"+to_string(log2cycle)+"\n";
   // }
   // fout.close();
   //** print n>1
@@ -269,7 +269,7 @@ int main(){
   //   fout<<"n\tsequence\tkth term\t0th or 1st\tlog2 Cn\n";
   //   for(unsigned long long int i=pow(2, pow(2, j)); i<=pow(2, pow(2, j+1))-1; i++){
   //     unsigned long long int log2cycle = log2(C(i));
-  //     fout<<to_string(i)+"\t"+get_sequence(i)+"\t"+to_string(get_sequence_term_number(i))+"\t"+to_string(get_sequence_term_number_0th_or_1st(i))+"\t"+to_string(log2cycle)+"\n";
+  //     fout<<to_string(i)+"\t"+get_sequence(i)+"\t"+to_string(get_sequence_index(i))+"\t"+to_string(get_sequence_0th_or_1st(i))+"\t"+to_string(log2cycle)+"\n";
   //   }
   //   fout.close();
   //   cout<<"* Finished j = "<<j<< " *\n";
