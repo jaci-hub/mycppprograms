@@ -211,11 +211,53 @@ unsigned long long int substring_occurrences_in_a_string(string pattern, string 
 }
 
 /*
-  Returns the frequency of a sequence term
+  Returns the frequency of a sequence term;
+  IMPORTANT: This function is only applicable for sequences in
+              intervals where log2cycle > 2 aka l>2
 */
-int get_frequency(string sequence, int index, int is0thor1st){
-  //TODO page 18-19
-  return 0;
+int get_frequency(int l, string sequence, int index){
+  if(l>2){
+    int index_const_part = pow(2, pow(2, l-1)-4)-1;
+    //checking a-sequence
+    if(sequence == "a"){
+      //first a
+      if(index%4==0){
+        return (index/4)-index_const_part;
+      }
+      //second a
+      else if((index-1)%4==0){
+        return ((index-1)/4)-index_const_part;
+      }
+      //third a
+      else if((index-2)%4==0){
+        return ((index-2)/4)-index_const_part;
+      }
+      //fourth a
+      else if((index-3)%4==0){
+        return ((index-3)/4)-index_const_part;
+      }
+    }
+    //checking b-sequence
+    if(sequence == "b"){
+      return index - index_const_part;
+    }
+    //checking c-sequence
+    if(sequence == "c"){
+      return index - index_const_part;
+    }
+    //checking d-sequence
+    if(sequence == "d"){
+      //first d
+      if(index%2==0){
+        return (index/2)-index_const_part;
+      }
+      //second d
+      else if((index-1)%2==0){
+        return ((index-1)/2)-index_const_part;
+      }
+    }
+  }
+  return -1;
 }
 
 /*
@@ -230,15 +272,15 @@ int main(){
   /*
     NTH GRAY CODE NUMBER
   */
-  string a="Your nth gray code algorithm works!!!";
-  for(unsigned long long int i=0; i<=pow(10,5); i++){ 
-    if(G(i)!= g(i)){
-      a="";
-      cout<<"Wrong for i = "<< i;
-      break;
-    }
-  }
-  cout<<a<<"\n";
+  // string a="Your nth gray code algorithm works!!!";
+  // for(unsigned long long int i=0; i<=pow(10,5); i++){ 
+  //   if(G(i)!= g(i)){
+  //     a="";
+  //     cout<<"Wrong for i = "<< i;
+  //     break;
+  //   }
+  // }
+  // cout<<a<<"\n";
 
   /*
     SEQUENCE THAT N BELONGS TO
@@ -321,6 +363,15 @@ int main(){
   //   cout<<"* Finished j = "<<j<< " *\n";
   // }
   // fout.close();
+
+  /*
+    GET FREQUENCY OF SEQUENCY TERM IN THE PATTERN dadacbabca
+  */
+  int l=4;
+  string sequence="c";
+  int index=17;
+  cout<<"sequence_term\tfrequency\n";
+  cout<<sequence+"_"<<index<<"\t"<<get_frequency(l, sequence, index)<<"\n";
 
   return 0;
 }
