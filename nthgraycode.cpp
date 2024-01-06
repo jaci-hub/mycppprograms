@@ -213,7 +213,7 @@ unsigned long long int substring_occurrences_in_a_string(string pattern, string 
 /*
   Returns the frequency of a sequence term
 */
-int f(int n){
+int freq(int n){
   //TODO page 18-19
   return 0;
 }
