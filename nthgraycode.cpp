@@ -12,7 +12,7 @@ using namespace std;
 My goal is to find the nth gray code number using sequences!
 */
 
-//g(n) gives the nth gray code
+//Returns the nth gray code
 unsigned long long int g (unsigned long long int n) {
   return n ^ (n >> 1);
 }
@@ -42,7 +42,7 @@ unsigned long long int d(unsigned long long int k){
 }
 
 /*
-  This function returns the nth gray code, using a,b,c and d sequences
+  Returns the nth gray code, using a,b,c and d sequences
 */
 unsigned long long int G(unsigned long long int n){
   //checking a-sequence
@@ -73,7 +73,7 @@ unsigned long long int G(unsigned long long int n){
 }
 
 /*
-  This function returns the sequence that n+G(n) belongs to. 
+  Returns the sequence that n+G(n) belongs to. 
   For example, n=13 implies c-sequence, because n+G(n) = 13+11 = 24, and 24 is part of the c-sequence
 */
 string get_sequence(unsigned long long int n){
@@ -105,7 +105,7 @@ string get_sequence(unsigned long long int n){
 }
 
 /*
-  This function returns the index of the sequence term. 
+  Returns the index of the sequence term. 
   For example, the general term of the a-sequence is a(k), so the function returns k
 */
 unsigned long long int get_sequence_index(unsigned long long int n){
@@ -137,7 +137,7 @@ unsigned long long int get_sequence_index(unsigned long long int n){
 }
 
 /*
-  This function returns 0 if the kth term of a sequence is the first one, and 1 otherwise.
+  Returns 0 if the kth term of a sequence is the first one, and 1 otherwise.
   For example the a-sequence has 5 and 5 as its first term, a(0), k=0.
   The point is that it allows us to know if when n=2, for example, which has G(n)=3, which 5 in the a-sequence
   their sum (n+G(n)) refers to. In this case it refers to the first 5, and the second is for when n=3.
@@ -171,7 +171,7 @@ unsigned long long int get_sequence_0th_or_1st(unsigned long long int n){
 }
 
 /*
-  Gives the cycle of n, which is defined as applying g(n) repeatedly till the result is n again.
+  Returns the cycle of n, which is defined as applying g(n) repeatedly till the result is n again.
 */
 unsigned long long int recursion_C(unsigned long long int n){
   int res=n, counter=1;
@@ -208,6 +208,22 @@ unsigned long long int substring_occurrences_in_a_string(string pattern, string 
     }
   }
   return occurrence;
+}
+
+/*
+  Returns the frequency of a sequence term
+*/
+int f(int n){
+  //TODO page 18-19
+  return 0;
+}
+
+/*
+  Returns the shifted index of a sequence term
+*/
+int shift_index(int n){
+  //TODO page 19-20
+  return 0;
 }
 
 int main(){
