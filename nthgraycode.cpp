@@ -264,8 +264,50 @@ int get_frequency(int l, string sequence, int index){
   Returns the shifted index of a sequence term
 */
 int get_shifted_index(string sequence, int index, int is0thor1st){
-  //TODO page 19-20
-  return 0;
+  //checking a-sequence
+  if(sequence == "a"){
+    if(index%4==0){
+      return 1;
+    }
+    else if(index%2==0 && index%4!=0){
+      return 6;
+    }
+    else if((index-1)%4==0){
+      return 3;
+    }
+    else if((index-3)%4==0){
+      return 9;
+    }
+  }
+  //checking b-sequence
+  if(sequence == "b"){
+    if(is0thor1st == 0){
+      return 5;
+    }
+    else if(is0thor1st == 1){
+      return 7;
+    }
+  }
+  //checking c-sequence
+  if(sequence == "c"){
+    if(is0thor1st == 0){
+      return 4;
+    }
+    else if(is0thor1st == 1){
+      return 8;
+    }
+  }
+  //checking d-sequence
+  if(sequence == "d"){
+    if(index%2==0){
+      return 0;
+    }
+    else{
+      return 2;
+    }
+  }
+
+  return -1;
 }
 
 int main(){
@@ -365,13 +407,21 @@ int main(){
   // fout.close();
 
   /*
-    GET FREQUENCY OF SEQUENCY TERM IN THE PATTERN dadacbabca
+    GET FREQUENCY OF SEQUENCE TERM IN THE PATTERN dadacbabca
   */
-  int l=4;
-  string sequence="c";
-  int index=17;
-  cout<<"sequence_term\tfrequency\n";
-  cout<<sequence+"_"<<index<<"\t"<<get_frequency(l, sequence, index)<<"\n";
+  // int l=5;
+  // string sequence="a";
+  // int index=16388;
+  // cout<<"sequence_index\tfrequency\n";
+  // cout<<sequence+"_"<<index<<"\t"<<get_frequency(l, sequence, index)<<"\n";
+
+  /*
+    INDEX SHIFTING
+  */
+  string sequence="b";
+  int index=18, is0thor1st=0;
+  cout<<"sequence_index\tshifted index\n";
+  cout<<sequence+"_"<<index<<"\t"<<get_shifted_index(sequence, index, is0thor1st)<<"\n";
 
   return 0;
 }
