@@ -213,7 +213,7 @@ unsigned long long int substring_occurrences_in_a_string(string pattern, string 
 /*
   Returns the frequency of a sequence term
 */
-int get_frequency(int n){
+int get_frequency(string sequence, int index, int is0thor1st){
   //TODO page 18-19
   return 0;
 }
@@ -221,7 +221,7 @@ int get_frequency(int n){
 /*
   Returns the shifted index of a sequence term
 */
-int get_shifted_index(string sequence, int index=0, int is0thor1st=0){
+int get_shifted_index(string sequence, int index, int is0thor1st){
   //TODO page 19-20
   return 0;
 }
