@@ -221,7 +221,7 @@ int freq(int n){
 /*
   Returns the shifted index of a sequence term
 */
-int shift_index(int n){
+int shift_index(string sequence, int index, int is0thor1st){
   //TODO page 19-20
   return 0;
 }
