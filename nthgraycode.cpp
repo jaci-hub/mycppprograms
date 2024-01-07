@@ -216,7 +216,10 @@ unsigned long long int substring_occurrences_in_a_string(string pattern, string 
               intervals where log2cycle > 2 aka l>2
 */
 int get_frequency(int l, string sequence, int index){
-  if(l>2){
+  if(l == 2){
+    return 1;
+  }
+  else if(l > 2){
     int index_const_part = pow(2, pow(2, l-1)-4)-1;
     //checking a-sequence
     if(sequence == "a"){
@@ -446,19 +449,19 @@ int main(){
   /*
     GET FREQUENCY OF SEQUENCE TERM IN THE PATTERN dadacbabca
   */
-  // int l=5;
-  // string sequence="a";
-  // int index=16388;
-  // cout<<"sequence_index\tfrequency\n";
-  // cout<<sequence+"_"<<index<<"\t"<<get_frequency(l, sequence, index)<<"\n";
+  int l=2;
+  string sequence="d";
+  int index=1;
+  cout<<"sequence_index\tfrequency\n";
+  cout<<sequence+"_"<<index<<"\t"<<get_frequency(l, sequence, index)<<"\n";
 
   /*
     PATTERN INDEX
   */
-  string sequence="d";
-  int l=2, index=1, is0thor1st=0;
-  cout<<"sequence_index\tpattern index\n";
-  cout<<sequence+"_"<<index<<"\t"<<get_pattern_index(l, sequence, index, is0thor1st)<<"\n";
+  // string sequence="d";
+  // int l=2, index=1, is0thor1st=0;
+  // cout<<"sequence_index\tpattern index\n";
+  // cout<<sequence+"_"<<index<<"\t"<<get_pattern_index(l, sequence, index, is0thor1st)<<"\n";
 
   return 0;
 }
