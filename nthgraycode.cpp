@@ -142,7 +142,7 @@ unsigned long long int get_sequence_index(unsigned long long int n){
   The point is that it allows us to know if when n=2, for example, which has G(n)=3, which 5 in the a-sequence
   their sum (n+G(n)) refers to. In this case it refers to the first 5, and the second is for when n=3.
 */
-unsigned long long int get_sequence_0th_or_1st(unsigned long long int n){
+unsigned long long int get_0th_or_1st(unsigned long long int n){
   //checking a-sequence
   if((n-2)%4==0)
     return 0;
@@ -261,49 +261,86 @@ int get_frequency(int l, string sequence, int index){
 }
 
 /*
-  Returns the shifted index of a sequence term
+  Returns the index of a sequence term in the dadacbabca pattern
 */
-int get_shifted_index(string sequence, int index, int is0thor1st){
+int get_pattern_index(int l, string sequence, int index, int is0thor1st){
   //checking a-sequence
   if(sequence == "a"){
-    if(index%4==0){
-      return 1;
+    if(l == 2){
+      if(index == 1){
+        return 1;
+      }
+      else if(index == 2){
+        return 4;
+      }
     }
-    else if(index%2==0 && index%4!=0){
-      return 6;
-    }
-    else if((index-1)%4==0){
-      return 3;
-    }
-    else if((index-3)%4==0){
-      return 9;
+    if(l>2){
+      if(index%4==0){
+        return 1;
+      }
+      else if(index%2==0 && index%4!=0){
+        return 6;
+      }
+      else if((index-1)%4==0){
+        return 3;
+      }
+      else if((index-3)%4==0){
+        return 9;
+      }
     }
   }
   //checking b-sequence
   if(sequence == "b"){
-    if(is0thor1st == 0){
-      return 5;
+    if(l == 2){
+      if(is0thor1st == 0){
+        return 3;
+      }
+      else if(is0thor1st == 1){
+        return 5;
+      }
     }
-    else if(is0thor1st == 1){
-      return 7;
+    if(l > 2){
+      if(is0thor1st == 0){
+        return 5;
+      }
+      else if(is0thor1st == 1){
+        return 7;
+      }
     }
   }
   //checking c-sequence
   if(sequence == "c"){
-    if(is0thor1st == 0){
-      return 4;
+    if(l == 2){
+      if(is0thor1st == 0){
+        return 2;
+      }
+      else if(is0thor1st == 1){
+        return 6;
+      }
     }
-    else if(is0thor1st == 1){
-      return 8;
+    if(l > 2){
+      if(is0thor1st == 0){
+        return 4;
+      }
+      else if(is0thor1st == 1){
+        return 8;
+      }
     }
   }
   //checking d-sequence
   if(sequence == "d"){
-    if(index%2==0){
-      return 0;
+    if(l == 2){
+      if(index == 1){
+        return 0;
+      }
     }
-    else{
-      return 2;
+    if(l > 2){
+      if(index%2 == 0){
+        return 0;
+      }
+      else{
+        return 2;
+      }
     }
   }
 
@@ -335,7 +372,7 @@ int main(){
     SEQUENCE TERM AND 0th OR 1st
   */
   // for(unsigned long long int n=0; n<=31; n++){
-  //   cout<<n<<": "<<get_sequence_index(n)<<" - "<<get_sequence_0th_or_1st(n)<<"\n";
+  //   cout<<n<<": "<<get_sequence_index(n)<<" - "<<get_0th_or_1st(n)<<"\n";
   // }
 
   /*
@@ -360,7 +397,7 @@ int main(){
   // fout<<"n\tsequence\tkth term\t0th or 1st\tlog2 Cn\n";
   // for(unsigned long long int i=0; i<=1; i++){
   //   unsigned long long int log2cycle = log2(C(i));
-  //   fout<<to_string(i)+"\t"+get_sequence(i)+"\t"+to_string(get_sequence_index(i))+"\t"+to_string(get_sequence_0th_or_1st(i))+"\t"+to_string(log2cycle)+"\n";
+  //   fout<<to_string(i)+"\t"+get_sequence(i)+"\t"+to_string(get_sequence_index(i))+"\t"+to_string(get_0th_or_1st(i))+"\t"+to_string(log2cycle)+"\n";
   // }
   // fout.close();
   //** print n>1
@@ -369,7 +406,7 @@ int main(){
   //   fout<<"n\tsequence\tkth term\t0th or 1st\tlog2 Cn\n";
   //   for(unsigned long long int i=pow(2, pow(2, j)); i<=pow(2, pow(2, j+1))-1; i++){
   //     unsigned long long int log2cycle = log2(C(i));
-  //     fout<<to_string(i)+"\t"+get_sequence(i)+"\t"+to_string(get_sequence_index(i))+"\t"+to_string(get_sequence_0th_or_1st(i))+"\t"+to_string(log2cycle)+"\n";
+  //     fout<<to_string(i)+"\t"+get_sequence(i)+"\t"+to_string(get_sequence_index(i))+"\t"+to_string(get_0th_or_1st(i))+"\t"+to_string(log2cycle)+"\n";
   //   }
   //   fout.close();
   //   cout<<"* Finished j = "<<j<< " *\n";
@@ -416,12 +453,12 @@ int main(){
   // cout<<sequence+"_"<<index<<"\t"<<get_frequency(l, sequence, index)<<"\n";
 
   /*
-    INDEX SHIFTING
+    PATTERN INDEX
   */
-  string sequence="b";
-  int index=18, is0thor1st=0;
-  cout<<"sequence_index\tshifted index\n";
-  cout<<sequence+"_"<<index<<"\t"<<get_shifted_index(sequence, index, is0thor1st)<<"\n";
+  string sequence="d";
+  int l=2, index=1, is0thor1st=0;
+  cout<<"sequence_index\tpattern index\n";
+  cout<<sequence+"_"<<index<<"\t"<<get_pattern_index(l, sequence, index, is0thor1st)<<"\n";
 
   return 0;
 }
