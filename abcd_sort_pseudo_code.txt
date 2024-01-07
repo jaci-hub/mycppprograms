@@ -1,0 +1,128 @@
+//abcd sort pseudo-code
+abcd_sort(array_to_sort):
+    N = array_to_sort.size()
+    sorted_array = []
+    D = {}
+    max_l = 0
+    max_frequency = 0
+    //STEP 1
+    for i = 0 to i < N:
+        l = log2(C(array_to_sort[i]))
+        if l > max_l:
+            max_l = l
+        if l not in D:
+            D[l] = []
+            D[l].append(array_to_sort[i])
+        else:
+            D[l].append(array_to_sort[i])
+    //STEP 2
+    for l in D:
+        sequence_dict = {}
+        for number in D[l]:
+            sequence = get_sequence(number)
+            if sequence not in sequence_dict:
+                sequence_dict[sequence] = []
+                sequence_dict[sequence].append(number)
+            else:
+                sequence_dict[sequence].append(number)
+        D[l] = sequence_dict
+    //STEP 3
+    for l in D:
+        for sequence in D[l]:
+            sequence_index_dict = {}
+            for number in D[l][sequence]:
+                index = get_sequence_index(number)
+                if index not in sequence_index_dict:
+                    sequence_index_dict[index] = []
+                    sequence_index_dict[index].append(number)
+                else:
+                    sequence_index_dict[index].append(number)
+            D[l][sequence] = sequence_index_dict
+    //STEP 4
+    for l in D:
+        for sequence in D[l]:
+            for index in D[l][sequence]:
+                is0th_dict = {}
+                is1st_dict = {}
+                for number in D[l][sequence][index]:
+                    is0thor1st = get_0th_or_1st(number)
+                    if is0thor1st is 0:
+                        is0th_dict[0].append(number)
+                    else if is0thor1st is 1:
+                        is1st_dict[1].append(number)
+                D[l][sequence][index] = {}
+                D[l][sequence][index].add(is0th_dict)
+                D[l][sequence][index].add(is1st_dict)
+    //STEP 5
+    for l in D:
+        for sequence in D[l]:
+            if sequence is "a" or "d":
+                for index in D[l][sequence]:
+                    all0th_array = D[l][sequence][index][0]
+                    all1st_array = D[l][sequence][index][1]
+                    if l > 1:
+                        D[l][sequence][index] = all0th_array.append(all1st_array)
+                    else if l <= 1:
+                        D[l] = all0th_array.append(all1st_array)
+    //STEP 6
+    for l in D:
+        if l > 1:
+            frequency_dict = {}
+            for sequence in D[l]:
+                for index in D[l][sequence]:
+                    frequency = get_frequency(l, sequence, index)
+                    if frequency > max_frequency:
+                        max_frequency = frequency
+                    if frequency not in frequency_dict:
+                        frequency_dict[frequency] = {}
+                        frequency_dict[frequency][sequence] = {}
+                        frequency_dict[frequency][sequence][index] = []
+                        frequency_dict[frequency][sequence][index].append(D[l][sequence][index])
+                    else:
+                        frequency_dict[frequency][sequence][index].append(D[l][sequence][index])
+            D[l] = frequency_dict
+    //STEP 7
+    for l in D:
+        if l > 1:
+            for frequency in D[l]:
+                pattern_index_dict = {}
+                for sequence in D[l][frequency]:
+                    for index in D[l][frequency][sequence]:
+                        if sequence == "b" or "c":
+                            for is0thor1st in D[l][frequency][sequence][index]:
+                                pattern_index = get_pattern_index(l, sequence, index, is0thor1st)
+                                if pattern_index not in pattern_index_dict:
+                                    pattern_index_dict[pattern_index] = []
+                                    pattern_index_dict[pattern_index].append(D[l][frequency][sequence][index][is0thor1st])
+                                else:
+                                    pattern_index_dict[pattern_index].append(D[l][frequency][sequence][index][is0thor1st])
+                        else:      
+                            pattern_index = get_pattern_index(l, sequence, index)
+                            if pattern_index not in pattern_index_dict:
+                                pattern_index_dict[pattern_index] = []
+                                pattern_index_dict[pattern_index].append(D[l][frequency][sequence][index])
+                            else:
+                                pattern_index_dict[pattern_index].append(D[l][frequency][sequence][index])
+                D[l][frequency] = pattern_index_dict
+    //STEP 8
+    for l in D:
+        if l > 1:
+            for frequency in D[l]:
+                frequency_array = []
+                for pattern_index in range(0, 10):
+                    if pattern_index in D[l][frequency]:
+                        frequency_array.append(D[l][frequency][pattern_index])
+                D[l][frequency] = frequency_array
+    //STEP 9
+    for l in D:
+        if l > 1:
+            l_array = []
+            for frequency in range(1, max_frequency):
+                if frequency in D[l]:
+                    l_array.append(D[l][frequency])
+            D[l] = l_array
+    //STEP 10
+    for l in range(0, max_l):
+        if l in D:
+            sorted_array.append(D[l])
+    return sorted_array

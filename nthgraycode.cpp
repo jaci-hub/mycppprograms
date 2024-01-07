@@ -173,7 +173,7 @@ unsigned long long int get_0th_or_1st(unsigned long long int n){
 /*
   Returns the cycle of n, which is defined as applying g(n) repeatedly till the result is n again.
 */
-unsigned long long int recursion_C(unsigned long long int n){
+unsigned long long int C_with_loop(unsigned long long int n){
   int res=n, counter=1;
   while(g(res)!=n){
     res=g(res);
@@ -264,9 +264,9 @@ int get_frequency(int l, string sequence, int index){
 }
 
 /*
-  Returns the index of a sequence term in the dadacbabca pattern
+  Returns the index of a sequence term in the dacbabca pattern, if l=2 and dadacbabca pattern, if l>2
 */
-int get_pattern_index(int l, string sequence, int index, int is0thor1st){
+int get_pattern_index(int l, string sequence, int index, int is0thor1st = 0){
   //checking a-sequence
   if(sequence == "a"){
     if(l == 2){
@@ -383,7 +383,7 @@ int main(){
   */
   // string a="Your cycle algorithm works!!!";
   // for(unsigned long long int i=0; i<=pow(10,5); i++){
-  //   if(recursion_C(i)!=C(i)){
+  //   if(C_with_loop(i)!=C(i)){
   //     a="";
   //     cout<<"Failed for i = "<<i<<"\n";
   //     break;
