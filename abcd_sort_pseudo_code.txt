@@ -58,8 +58,14 @@ abcd_sort(array_to_sort):
         for sequence in D[l]:
             if sequence is "a" or "d":
                 for index in D[l][sequence]:
-                    all0th_array = D[l][sequence][index][0]
-                    all1st_array = D[l][sequence][index][1]
+                    if 0 in D[l][sequence][index]:
+                        all0th_array = D[l][sequence][index][0]
+                    else:
+                        all0th_array = []
+                    if 1 in D[l][sequence][index]:
+                        all1st_array = D[l][sequence][index][1]
+                    else:
+                        all1st_array = []
                     if l > 1:
                         D[l][sequence][index] = all0th_array.append(all1st_array)
                     else if l <= 1:
