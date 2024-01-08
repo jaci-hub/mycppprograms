@@ -42,8 +42,8 @@ abcd_sort(array_to_sort):
     for l in D:
         for sequence in D[l]:
             for index in D[l][sequence]:
-                is0th_dict = {}
-                is1st_dict = {}
+                is0th_dict = {0: []}
+                is1st_dict = {1: []}
                 for number in D[l][sequence][index]:
                     is0thor1st = get_0th_or_1st(number)
                     if is0thor1st is 0:
@@ -66,10 +66,11 @@ abcd_sort(array_to_sort):
                         all1st_array = D[l][sequence][index][1]
                     else:
                         all1st_array = []
+                    all0th_array.extend(all1st_array)
                     if l > 1:
-                        D[l][sequence][index] = all0th_array.append(all1st_array)
-                    else if l <= 1:
-                        D[l] = all0th_array.append(all1st_array)
+                        D[l][sequence][index] = all0th_array
+                    elif l <= 1:
+                        D[l] = all0th_array
     //STEP 6
     for l in D:
         if l > 1:
@@ -81,11 +82,35 @@ abcd_sort(array_to_sort):
                         max_frequency = frequency
                     if frequency not in frequency_dict:
                         frequency_dict[frequency] = {}
-                        frequency_dict[frequency][sequence] = {}
-                        frequency_dict[frequency][sequence][index] = []
-                        frequency_dict[frequency][sequence][index].append(D[l][sequence][index])
+                        if sequence not in frequency_dict[frequency]:
+                            frequency_dict[frequency][sequence] = {}
+                        if isinstance(D[l][sequence][index], list):
+                            frequency_dict[frequency][sequence][index] = []
+                            frequency_dict[frequency][sequence][index].extend(D[l][sequence][index])
+                        elif isinstance(D[l][sequence][index], dict):
+                            if index not in frequency_dict[frequency][sequence]:
+                                frequency_dict[frequency][sequence][index] = {}
+                            for is0thor1st in D[l][sequence][index]:
+                                if is0thor1st not in frequency_dict[frequency][sequence][index]:
+                                    frequency_dict[frequency][sequence][index][is0thor1st] = []
+                                    frequency_dict[frequency][sequence][index][is0thor1st].extend(D[l][sequence][index][is0thor1st])
+                                else:
+                                    frequency_dict[frequency][sequence][index][is0thor1st].extend(D[l][sequence][index][is0thor1st])
                     else:
-                        frequency_dict[frequency][sequence][index].append(D[l][sequence][index])
+                        if sequence not in frequency_dict[frequency]:
+                            frequency_dict[frequency][sequence] = {}
+                        if isinstance(D[l][sequence][index], list):
+                            frequency_dict[frequency][sequence][index] = []
+                            frequency_dict[frequency][sequence][index].extend(D[l][sequence][index])
+                        elif isinstance(D[l][sequence][index], dict):
+                            if index not in frequency_dict[frequency][sequence]:
+                                frequency_dict[frequency][sequence][index] = {}
+                            for is0thor1st in D[l][sequence][index]:
+                                if is0thor1st not in frequency_dict[frequency][sequence][index]:
+                                    frequency_dict[frequency][sequence][index][is0thor1st] = []
+                                    frequency_dict[frequency][sequence][index][is0thor1st].extend(D[l][sequence][index][is0thor1st])
+                                else:
+                                    frequency_dict[frequency][sequence][index][is0thor1st].extend(D[l][sequence][index][is0thor1st])
             D[l] = frequency_dict
     //STEP 7
     for l in D:
@@ -123,12 +148,12 @@ abcd_sort(array_to_sort):
     for l in D:
         if l > 1:
             l_array = []
-            for frequency in range(1, max_frequency):
+            for frequency in range(1, max_frequency+1):
                 if frequency in D[l]:
                     l_array.append(D[l][frequency])
             D[l] = l_array
     //STEP 10
-    for l in range(0, max_l):
+    for l in range(0, max_l+1):
         if l in D:
             sorted_array.append(D[l])
     return sorted_array

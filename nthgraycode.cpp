@@ -4,6 +4,7 @@
 #include<algorithm> //for sort
 #include<cmath>
 #include<fstream>
+#include<map>
 using namespace std;
 
 //NAME: JACINTO QUIMUA
